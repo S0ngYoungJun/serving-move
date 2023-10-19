@@ -9,8 +9,7 @@ var subpage = require('./test')
 // var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 
 http.createServer(function(req, res) {
-  
-    console.log(req.url)
+  //get방식으로 파일 조회//
     if(req.url==='/'){
     fs.readFile('index.html'  ,'utf8' ,function(error, data) {
         res.writeHead(200, {'Content-Type' : 'text/html' });
@@ -21,14 +20,13 @@ http.createServer(function(req, res) {
         res.write(fs.readFileSync('./css/main.css'));
         return res.end();
       })};
-
-      if(req.url==="/sub.css"){
+    if(req.url==="/sub.css"){
         fs.readFile('sub.css','utf-8', function (err, data)  {
           res.writeHead(200, { 'Content-Type': 'text/css' });
           res.write(fs.readFileSync('sub.css'));
           return res.end()
         })}
-  
+  //post방식으로 파일 수정//
     if(req.method === 'POST'&& req.url==="/login"){
       fs.readFile('index2.html','utf8' ,function(error, data) {
         res.writeHead(200, {'Content-Type' : 'text/html' });
