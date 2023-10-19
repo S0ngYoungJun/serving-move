@@ -3,7 +3,7 @@ var fs = require("fs")
 var querystring = require('querystring');
 var signUpAsset = require('./module')
 const port = 5000;
-var subpage = require('./test')
+var path1= require('./test')
 // var regex=/^[a-z0-9]*$/;
 // var regey=/^[A-Z0-9]*$/;
 // var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
@@ -21,30 +21,27 @@ http.createServer(function(req, res) {
         res.write(fs.readFileSync('./css/main.css'));
         return res.end();
       })};
-
-      if(req.url==="/sub.css"){
-        fs.readFile('sub.css','utf-8', function (err, data)  {
-          res.writeHead(200, { 'Content-Type': 'text/css' });
-          res.write(fs.readFileSync('sub.css'));
-          return res.end()
-        })}
   
     if(req.method === 'POST'&& req.url==="/login"){
-      fs.readFile('index2.html','utf8' ,function(error, data) {
-        res.writeHead(200, {'Content-Type' : 'text/html' });
-        res.end(data);})
-        
         var body = '';
         req.on('data', (chunk)=>{
             body +=chunk.toString()
         })
         req.on('end', () => {
-            // res.writeHead(200, {'Content-Type' : 'text/html;charset=utf-8'});
+            res.writeHead(200, {'Content-Type' : 'text/html;charset=utf-8'});
             var data = querystring.parse(body);
-            Object.assign(signUpAsset, data)
             console.log(data);
-          res.end(subpage(signUpAsset.id))
-      
+            res.end(path1)
+            // fs.readFile('index2.html'  ,'utf8' ,function(error, data) {
+            //   res.writeHead(200, {'Content-Type' : 'text/html' });
+            //   res.end(data);})
+            //   if(req.url === '/login/sub.css'){
+            //   fs.readFile('sub.css','utf-8', function (err, data1)  {
+            //     res.writeHead(200, { 'Content-Type': 'text/css' });
+            //     res.write(fs.readFileSync('sub.css'));
+            //     return res.end()
+            //   })
+            // }
         })}
         if(req.method == 'POST'&& req.url==="/send"){
           var head = '';
