@@ -40,7 +40,7 @@ http.createServer(function(req, res) {
             // res.writeHead(200, {'Content-Type' : 'text/html;charset=utf-8'});
             var data = querystring.parse(body);
             Object.assign(signUpAsset, data)
-            console.log(data);
+            console.log(signUpAsset);
           res.end(subpage(signUpAsset.id))
       
         })}
